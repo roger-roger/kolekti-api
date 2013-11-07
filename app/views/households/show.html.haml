@@ -1,0 +1,13 @@
+%p#notice= notice
+
+%table
+  %tr
+    %th Name
+
+  %tr
+    %td= @household.name
+%br
+
+= link_to 'Edit', edit_household_path(@household)
+\|
+= link_to 'Back', households_path

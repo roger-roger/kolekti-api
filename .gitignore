@@ -12,5 +12,19 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
+/log/*
 /tmp
+*.rdb
+coverage
+
+# Ignore uploads
+public/uploads
+
+# Ignore local env file
+env.local.rb
+
+#Ignore Stupid Finder Files
+.DS_Store
+
+# Ignore local rspec config
+.rspec

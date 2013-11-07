@@ -23,3 +23,21 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
+
+# development: &defaults
+#   adapter: mysql2
+#   database: <%= ENV["DB_NAME"] %>
+#   username: <%= ENV["DB_USER"] %>
+#   password: <%= ENV["DB_PASSWORD"] %>
+#   min_messages: warning
+#   timeout: 5000
+
+# test:
+#   <<: *defaults
+#   database: <%= ENV["DB_NAME"].gsub('_development', '_test') %>
+
+# staging:
+#   <<: *defaults
+
+# production:
+#   <<: *defaults
