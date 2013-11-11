@@ -91,6 +91,10 @@ class PublicAPI < Grape::API
                 present current_widget.update_attributes params, with: Entities::WidgetEntity
               end
 
+              delete do
+                current_widget.delete
+              end
+
               post :collected do
                 current_widget.collect!
                 present current_widget, with: Entities::WidgetEntity
