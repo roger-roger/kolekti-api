@@ -53,6 +53,14 @@ class PublicAPI < Grape::API
             present current_bundle, with: Entities::BundleEntity
           end
 
+          params do
+            optional :name, type: String
+          end
+          post do
+            present current_bundle.update_attributes params, with: Entities::BundleEntity
+          end
+
+
           resource :widgets do
             get do
               present current_bundle.widgets, with: Entities::WidgetEntity
@@ -61,14 +69,30 @@ class PublicAPI < Grape::API
             params do
               requires :name, type: String
               optional :quantity, type: Integer
+              optional :budget, type: Integer
             end
             post do
-              widget = Widget.create! name: params[:name], bundle: current_bundle, quantity: params[:quantity]
+              widget = Widget.create! name: params[:name], bundle: current_bundle, quantity: params[:quantity], budget: params[:budget]
               present widget, with: Entities::WidgetEntity
             end
 
+
             route_param :widget_id do
               get do
+                present current_widget, with: Entities::WidgetEntity
+              end
+
+              params do
+                optional :name, type: String
+                optional :quantity, type: Integer
+                optional :budget, type: Integer
+              end
+              post do
+                present current_widget.update_attributes params, with: Entities::WidgetEntity
+              end
+
+              post :collected do
+                current_widget.collect!
                 present current_widget, with: Entities::WidgetEntity
               end
             end
