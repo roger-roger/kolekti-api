@@ -9,4 +9,5 @@ class Entities::WidgetEntity < Grape::Entity
   expose :budget
   expose :cost
   expose :created_at, format_with: :iso_timestamp
+  expose :bundle_id
 end
