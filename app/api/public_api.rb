@@ -59,6 +59,9 @@ class PublicAPI < Grape::API
           post do
             present current_bundle.update_attributes params, with: Entities::BundleEntity
           end
+          delete do
+            current_bundle.delete
+          end
 
 
           resource :widgets do
