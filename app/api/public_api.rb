@@ -14,6 +14,26 @@ class PublicAPI < Grape::API
     def current_widget
       @current_widget ||= Widget.find(params[:widget_id])
     end
+
+    def current_user
+      @current_user ||= User.find(params[:user_id])
+    end
+  end
+
+  resource :members do
+    params do
+      requires :name, type: String
+    end
+    post do
+      user = User.create! name: params[:name]
+      present user, with: Entities::UserEntity
+    end
+
+    route_param :user_id do
+      get do
+        present current_user.households, with: Entities::HouseholdEntity
+      end
+    end
   end
 
   resource :households do
@@ -47,7 +67,7 @@ class PublicAPI < Grape::API
           bundle = Bundle.create! name: params[:name], household: current_household
           present bundle, with: Entities::BundleEntity
         end
-
+        # /api/households/:household_id/bundles/:bundle_id
         route_param :bundle_id do
           get do
             present current_bundle, with: Entities::BundleEntity
@@ -110,6 +130,15 @@ class PublicAPI < Grape::API
       resource :members do
         get do
           present current_household.users, with: Entities::UserEntity
+        end
+
+        params do
+          requires :user_id, type: Integer
+        end
+        post do
+          if current_user
+            current_household.users << current_user
+          end
         end
       end
     
