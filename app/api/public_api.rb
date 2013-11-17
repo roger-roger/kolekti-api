@@ -132,12 +132,15 @@ class PublicAPI < Grape::API
           present current_household.users, with: Entities::UserEntity
         end
 
-        post :user_id do
-          if current_user
-            current_household.users << current_user
-            current_household
+        route_param :user_id do
+          post do
+            if current_user
+              current_household.users << current_user
+              current_household
+            end
           end
         end
+        
       end
     
     end
