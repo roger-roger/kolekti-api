@@ -5,6 +5,6 @@ class Entities::HouseholdEntity < Grape::Entity
   expose :name
   expose :aasm_state, as: :state
   expose :bundles, using: Entities::BundleEntity
-  expose :users, as: :members, using: Entities::UserEntity
+  expose :users, using: Entities::UserEntity
   expose :created_at, format_with: :iso_timestamp
 end
