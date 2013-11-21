@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107023946) do
+ActiveRecord::Schema.define(version: 20131121041024) do
 
   create_table "bundles", force: true do |t|
     t.string   "name"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 20131107023946) do
     t.string   "name"
     t.integer  "quantity"
     t.integer  "collected"
-    t.decimal  "budget"
-    t.decimal  "cost"
+    t.decimal  "budget",     precision: 15, scale: 12
+    t.decimal  "cost",       precision: 15, scale: 12
     t.integer  "bundle_id"
     t.string   "aasm_state"
     t.datetime "created_at"

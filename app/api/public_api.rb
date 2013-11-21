@@ -34,6 +34,7 @@ class PublicAPI < Grape::API
         present current_user.households, with: Entities::HouseholdEntity
       end
     end
+
   end
 
   resource :households do
@@ -135,7 +136,7 @@ class PublicAPI < Grape::API
         route_param :user_id do
           post do
             if current_user
-              current_household.users << current_user
+              current_household.users << current_user unless current_household.users.exists? current_user
               current_household
             end
           end
